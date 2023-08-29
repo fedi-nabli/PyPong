@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -10,6 +11,8 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('PyPong')
 
 run = True
+directions = [0, 1]
+angles = [0, 1, 2]
 
 #COLORS
 BLACK = (0, 0, 0)
@@ -52,11 +55,41 @@ while run:
     ball_vel_y *= -1
   if ball_x >= WIDTH - radius:
     ball_x, ball_y = WIDTH/2 - radius, HEIGHT/2 - radius
+    direction = random.choice(directions)
+    angle = random.choice(angles)
+    if direction == 0:
+      if angle == 0:
+        ball_vel_y, ball_vel_x = -1.4, 0.7
+      if angle == 1:
+        ball_vel_y, ball_vel_x = -0.7, 0.7
+      if angle == 2:
+        ball_vel_y, ball_vel_x = -0.7, 1.4
+    if direction == 1:
+      if angle == 0:
+        ball_vel_y, ball_vel_x = 1.4, 0.7
+      if angle == 1:
+        ball_vel_y, ball_vel_x = 0.7, 0.7
+      if angle == 2:
+        ball_vel_y, ball_vel_x = 0.7, 1.4
     ball_vel_x *= -1
-    ball_vel_y *= -1
   if ball_x <= 0 + radius:
     ball_x, ball_y = WIDTH/2 - radius, HEIGHT/2 - radius
-    ball_vel_x, ball_vel_y = 0.7, 0.7
+    direction = random.choice(directions)
+    angle = random.choice(angles)
+    if direction == 0:
+      if angle == 0:
+        ball_vel_y, ball_vel_x = -1.4, 0.7
+      if angle == 1:
+        ball_vel_y, ball_vel_x = -0.7, 0.7
+      if angle == 2:
+        ball_vel_y, ball_vel_x = -0.7, 1.4
+    if direction == 1:
+      if angle == 0:
+        ball_vel_y, ball_vel_x = 1.4, 0.7
+      if angle == 1:
+        ball_vel_y, ball_vel_x = 0.7, 0.7
+      if angle == 2:
+        ball_vel_y, ball_vel_x = 0.7, 1.4
   
   #paddle's mouvement controls
   if left_paddle_y >= HEIGHT - paddle_height:
