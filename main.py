@@ -48,12 +48,16 @@ while run:
         right_paddle_vel = 0.9
       if event.key == pygame.K_RIGHT and right_gadget_remaining > 0:
         right_gadget = 1
+      if event.key == pygame.K_LEFT and right_gadget_remaining > 0:
+        right_gadget = 2
       if event.key == pygame.K_z:
         left_paddle_vel = -0.9
       if event.key == pygame.K_s:
         left_paddle_vel = 0.9
       if event.key == pygame.K_d and left_gadget_remaining > 0:
         left_gadget = 1
+      if event.key == pygame.K_q and left_gadget_remaining > 0:
+        left_gadget == 2
 
     if event.type == pygame.KEYUP:
       right_paddle_vel = 0
@@ -137,6 +141,14 @@ while run:
         ball_vel_x *= -3.5
         right_gadget = 0
         right_gadget_remaining -= 1
+  if left_gadget == 2:
+    left_paddle_y = ball_y
+    left_gadget = 0
+    left_gadget_remaining -= 1
+  if right_gadget == 2:
+    right_paddle_y = ball_y
+    right_gadget = 0
+    right_gadget_remaining -= 1
 
   #MOUVEMENT
   ball_x += ball_vel_x
