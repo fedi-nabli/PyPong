@@ -1,6 +1,6 @@
-# Pygame Pong Tutorial
+# Pygame Pong
 
-Welcome to the Pygame Pong Tutorial repository! This tutorial series focuses on enhancing the classic Pong game using the Pygame framework. 
+Welcome to the Pygame Pong repository! 
 
 ## Table of Contents
 
