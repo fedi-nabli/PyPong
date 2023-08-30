@@ -22,6 +22,9 @@ run = True
 directions = [0, 1]
 angles = [0, 1, 2]
 
+#SCORE
+player_1 = player_2 = 0
+
 #COLORS
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -89,6 +92,7 @@ while run:
   if dummy_ball_y <= 0 + radius or dummy_ball_y >= HEIGHT - radius:
     dummy_ball_vel_y *= -1
   if ball_x >= WIDTH - radius:
+    player_1 += 1
     ball_x, ball_y = WIDTH/2 - radius, HEIGHT/2 - radius
     dummy_ball_x, dummy_ball_y = WIDTH/2 - radius, HEIGHT/2 - radius
     second_left_paddle_y = left_paddle_y
@@ -119,6 +123,7 @@ while run:
     dummy_ball_vel_x *= -1
 
   if ball_x <= 0 + radius:
+    player_2 += 2
     ball_x, ball_y = WIDTH/2 - radius, HEIGHT/2 - radius
     dummy_ball_x, dummy_ball_y = WIDTH/2 - radius, HEIGHT/2 - radius
     second_left_paddle_y = left_paddle_y
@@ -285,6 +290,17 @@ while run:
   second_left_paddle_y += second_left_paddle_vel
   second_right_paddle_y += second_right_paddle_vel
 
+  #SCORE-BOARD
+  font = pygame.font.SysFont('callibri', 32)
+  score_1 = font.render(f"Player_1: {player_1}", True, WHITE)
+  window.blit(score_1, (25, 25))
+  score_2 = font.render(f"Player_2: {player_2}", True, WHITE)
+  window.blit(score_2, (825, 25))
+  gad_left_1 = font.render(f"Gad left: {left_gadget_remaining}", True, WHITE)
+  window.blit(gad_left_1, (25, 65))
+  gad_left_2 = font.render(f"Gad left: {right_gadget_remaining}", True, WHITE)
+  window.blit(gad_left_2, (825, 65))
+
   #OBJECTS
   pygame.draw.circle(window, BLUE, (ball_x, ball_y), radius)
   pygame.draw.rect(window, RED, pygame.Rect(left_paddle_x, left_paddle_y, paddle_width, paddle_height))
@@ -299,6 +315,18 @@ while run:
     pygame.draw.circle(window, WHITE, (left_paddle_x + 10, left_paddle_y + 10), 4)
   if right_gadget == 1:
     pygame.draw.circle(window, WHITE, (right_paddle_x + 10, right_paddle_y + 10), 4)
+
+  #ENDSCREEN
+  winning_font = pygame.font.SysFont('callibri', 100)
+  if player_1 >= 11:
+    window.fill(BLACK)
+    end_screen = winning_font.render(f'PLAYER_1 WON', True, WHITE)
+    window.blit(end_screen, (200, 250))
+  
+  if player_2 >= 11:
+    window.fill(BLACK)
+    end_screen = winning_font.render(f'PLAYER_2 WON', True, WHITE)
+    window.blit(end_screen, (200, 250))
 
   pygame.display.update()
   #clock.tick(FPS)
