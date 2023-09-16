@@ -3,12 +3,15 @@ import random
 
 pygame.init()
 
-gadget_pair = 1
-choice = int(input("Enter your choice for gadget pair: "))
-if choice == 1:
-  gadget_pair = 1
-elif choice == 2:
-  gadget_pair = 2
+gadget_pair = 0
+# Get the gadget pair choice (1 or 2)
+while gadget_pair not in [1, 2]:
+    try:
+        gadget_pair = int(input("Enter your choice for gadget pair (1 or 2): "))
+        if gadget_pair not in [1, 2]:
+            print("Invalid choice. Please enter 1 or 2.")
+    except ValueError:
+        print("Invalid input. Please enter a valid number (1 or 2).")
 
 clock = pygame.time.Clock()
 
@@ -51,7 +54,6 @@ second_right_paddle_vel = second_left_paddle_vel = 0
 #GADGETS
 left_gadget = right_gadget = 0
 left_gadget_remaining = right_gadget_remaining = 5
-
 #main loop
 while run:
   window.fill(BLACK)
